@@ -1,6 +1,6 @@
 package cl.previred.challenge.config;
 
-import cl.previred.challenge.UserDetailsServiceImpl;
+import cl.previred.challenge.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

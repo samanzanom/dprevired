@@ -1,4 +1,4 @@
-package cl.previred.challenge;
+package cl.previred.challenge.service;
 
 import cl.previred.challenge.entity.User;
 import cl.previred.challenge.exceptions.NotFoundException;

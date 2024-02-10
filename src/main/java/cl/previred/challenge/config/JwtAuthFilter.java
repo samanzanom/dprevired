@@ -1,6 +1,6 @@
 package cl.previred.challenge.config;
 
-import cl.previred.challenge.UserDetailsServiceImpl;
+import cl.previred.challenge.service.UserDetailsServiceImpl;
 import cl.previred.challenge.controller.dto.ApiErrorResponse;
 import cl.previred.challenge.exceptions.AccessDeniedException;
 import cl.previred.challenge.helper.JwtHelper;
