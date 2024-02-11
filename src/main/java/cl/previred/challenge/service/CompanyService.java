@@ -1,15 +1,19 @@
 package cl.previred.challenge.service;
 
 import cl.previred.challenge.controller.dto.CompanyRequest;
+import cl.previred.challenge.controller.dto.CompanyResponse;
 import cl.previred.challenge.entity.Company;
 import cl.previred.challenge.exceptions.DuplicateException;
 import cl.previred.challenge.exceptions.NotFoundException;
 import cl.previred.challenge.repository.CompanyRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,5 +59,21 @@ public class CompanyService {
         company.setCompanyName(request.companyName());
         company.setRut(request.rut());
         return repository.save(company);
+    }
+
+    @Transactional
+    public void delete(String id) {
+        Company company = repository.findById(id).orElseThrow(() ->
+                new NotFoundException(String.format("Company does not exist, id: %s", id)));
+        repository.delete(company);
+    }
+
+    public Company get(String id) {
+        return repository.findById(id).orElseThrow(() ->
+                new NotFoundException(String.format("Company does not exist, id: %s", id)));
+    }
+
+    public Page<Company> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }
