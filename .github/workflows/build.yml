@@ -40,11 +40,11 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Start Docker Compose services
-        run: docker-compose -f script/docker-compose.yml up -d
+        run: docker-compose -f scripts/docker-compose.yml up -d
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=samanzanom_dprevired
       - name: Shutdown Docker Compose services
-        run: docker-compose -f script/docker-compose.yml down
+        run: docker-compose -f scripts/docker-compose.yml down
