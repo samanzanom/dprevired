@@ -235,7 +235,7 @@ public class CompanyControllerTest {
     public void shouldCompanyUpdateNoAuthenticated() {
 
 
-        String creationRequest = """
+        String updateRequest = """
         {
           "rut": "1-9",
           "companyName": "previred"
@@ -244,7 +244,7 @@ public class CompanyControllerTest {
         webTestClient
                 .put().uri("/api/company")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(creationRequest)
+                .bodyValue(updateRequest)
                 .exchange()
                 .expectStatus()
                 .isForbidden()
