@@ -100,6 +100,6 @@ public class CompanyController {
     private List<CompanyResponse> convertToDTOs(List<Company> companies) {
         return companies.stream()
                 .map(CompanyResponse::convertToDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

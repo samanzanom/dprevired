@@ -561,8 +561,8 @@ class CompanyControllerTest {
 
         assertThat(pageResponse).isNotNull();
         assertThat(pageResponse.getCurrentPage()).isEqualTo(1);
-        assertThat(pageResponse.getTotalItems()).isGreaterThan(0);
-        assertThat(pageResponse.getTotalPages()).isGreaterThan(0);
+        assertThat(pageResponse.getTotalItems()).isPositive();
+        assertThat(pageResponse.getTotalPages()).isPositive();
         assertThat(pageResponse.getCompanies()).isNotNull();
         assertThat(pageResponse.getCompanies()).isInstanceOf(List.class);
         assertThat(pageResponse.getCompanies()).hasSizeGreaterThan(0);

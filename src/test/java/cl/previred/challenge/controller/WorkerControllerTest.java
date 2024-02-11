@@ -634,8 +634,8 @@ class WorkerControllerTest {
 
         assertThat(pageResponse).isNotNull();
         assertThat(pageResponse.getCurrentPage()).isEqualTo(1);
-        assertThat(pageResponse.getTotalItems()).isGreaterThan(0);
-        assertThat(pageResponse.getTotalPages()).isGreaterThan(0);
+        assertThat(pageResponse.getTotalItems()).isPositive();
+        assertThat(pageResponse.getTotalPages()).isPositive();
         assertThat(pageResponse.getWorkers()).isNotNull();
         assertThat(pageResponse.getWorkers()).isInstanceOf(List.class);
         assertThat(pageResponse.getWorkers()).hasSizeGreaterThan(0);
@@ -683,8 +683,8 @@ class WorkerControllerTest {
 
         assertThat(pageResponse).isNotNull();
         assertThat(pageResponse.getCurrentPage()).isEqualTo(1);
-        assertThat(pageResponse.getTotalItems()).isGreaterThan(0);
-        assertThat(pageResponse.getTotalPages()).isGreaterThan(0);
+        assertThat(pageResponse.getTotalItems()).isPositive();
+        assertThat(pageResponse.getTotalPages()).isPositive();
         assertThat(pageResponse.getWorkers()).isNotNull();
         assertThat(pageResponse.getWorkers()).isInstanceOf(List.class);
         assertThat(pageResponse.getWorkers()).hasSizeGreaterThan(0);

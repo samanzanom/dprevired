@@ -67,7 +67,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 return;
             }
 
-//       If any accessToken is present, then it will validate the token and then authenticate the request in security context
+            //If any accessToken is present, then it will validate the token and then authenticate the request in security context
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 if (JwtHelper.validateToken(token, userDetails)) {

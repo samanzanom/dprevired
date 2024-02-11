@@ -105,6 +105,6 @@ public class WorkerController {
     private List<WorkerResponse> convertToDTOs(List<Worker> workers) {
         return workers.stream()
                 .map(WorkerResponse::convertToDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

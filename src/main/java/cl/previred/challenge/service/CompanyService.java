@@ -20,6 +20,8 @@ public class CompanyService {
 
     private final CompanyRepository repository;
 
+    private static String NOT_FOUND_EXCEPTION = "Company does not exist, id: %s";
+
     public CompanyService(CompanyRepository repository) {
         this.repository = repository;
     }
@@ -52,7 +54,7 @@ public class CompanyService {
     @Transactional
     public Company update(String id, CompanyRequest request) {
         Company company = repository.findById(id).orElseThrow(() ->
-                new NotFoundException(String.format("Company does not exist, id: %s", id)));
+                new NotFoundException(String.format(NOT_FOUND_EXCEPTION, id)));
 
         company.setCompanyName(request.companyName());
         company.setRut(request.rut());
@@ -62,13 +64,13 @@ public class CompanyService {
     @Transactional
     public void delete(String id) {
         Company company = repository.findById(id).orElseThrow(() ->
-                new NotFoundException(String.format("Company does not exist, id: %s", id)));
+                new NotFoundException(String.format(NOT_FOUND_EXCEPTION, id)));
         repository.delete(company);
     }
 
     public Company get(String id) {
         return repository.findById(id).orElseThrow(() ->
-                new NotFoundException(String.format("Company does not exist, id: %s", id)));
+                new NotFoundException(String.format(NOT_FOUND_EXCEPTION, id)));
     }
 
     public Page<Company> findAll(Pageable pageable) {

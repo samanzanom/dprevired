@@ -42,7 +42,8 @@ public class RutValidator implements ConstraintValidator<ValidRut, String> {
             char dv = rut.charAt(rut.length() - 1);
 
             // Initialize variables for the calculation.
-            int m = 0, s = 1;
+            int m = 0;
+            int s = 1;
             for (; rutAux != 0; rutAux /= 10) { // Process each digit of the RUT.
                 // Calculate the sum 's' using each digit, multiplying by 2 to 7 cyclically.
                 s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
