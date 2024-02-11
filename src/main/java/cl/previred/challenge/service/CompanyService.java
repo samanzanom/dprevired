@@ -1,7 +1,6 @@
 package cl.previred.challenge.service;
 
 import cl.previred.challenge.controller.dto.CompanyRequest;
-import cl.previred.challenge.controller.dto.CompanyResponse;
 import cl.previred.challenge.entity.Company;
 import cl.previred.challenge.exceptions.DuplicateException;
 import cl.previred.challenge.exceptions.NotFoundException;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Service

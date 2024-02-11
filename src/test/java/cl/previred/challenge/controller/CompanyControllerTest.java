@@ -29,7 +29,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureWebTestClient
 public class CompanyControllerTest {
 
-    static final String COMPANY_URL = "/api/company/";
     static final String LOGIN_URL = "/api/auth/login";
 
     @Autowired
@@ -54,7 +53,7 @@ public class CompanyControllerTest {
         }
         """;
         webTestClient
-                .post().uri(COMPANY_URL)
+                .post().uri("/api/company/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(creationRequest)
                 .exchange()
@@ -78,7 +77,7 @@ public class CompanyControllerTest {
         }
         """;
         webTestClient
-                .post().uri(COMPANY_URL)
+                .post().uri("/api/company")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(creationRequest)
@@ -88,7 +87,7 @@ public class CompanyControllerTest {
                 .consumeWith(response -> {
                     assertThat(response.getResponseBody()).isNotNull();
                     assertThat(response.getResponseBody().rut()).isNotNull().isNotBlank();
-                    assertThat(response.getResponseBody().uniqueIdentifier()).isNotNull().isNotBlank();
+                    assertThat(response.getResponseBody().id()).isNotNull().isNotBlank();
                     assertThat(response.getResponseBody().companyName()).isNotNull().isNotBlank();
                 });
     }
@@ -105,7 +104,7 @@ public class CompanyControllerTest {
                 }
                 """;
         ApiErrorResponse errorResponse = webTestClient
-                .post().uri(COMPANY_URL)
+                .post().uri("/api/company")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(creationRequest)
@@ -131,7 +130,7 @@ public class CompanyControllerTest {
         }
         """;
         ApiErrorResponse errorResponse =webTestClient
-                .post().uri(COMPANY_URL)
+                .post().uri("/api/company")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(creationRequest)
@@ -159,7 +158,7 @@ public class CompanyControllerTest {
         }
         """;
         ApiErrorResponse errorResponse =webTestClient
-                .post().uri(COMPANY_URL)
+                .post().uri("/api/company")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(creationRequest)
@@ -186,7 +185,7 @@ public class CompanyControllerTest {
         }
         """;
         ApiErrorResponse errorResponse =webTestClient
-                .post().uri(COMPANY_URL)
+                .post().uri("/api/company")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(creationRequest)
@@ -215,7 +214,7 @@ public class CompanyControllerTest {
         }
         """;
         ApiErrorResponse errorResponse =webTestClient
-                .post().uri(COMPANY_URL)
+                .post().uri("/api/company")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(creationRequest)
@@ -243,7 +242,7 @@ public class CompanyControllerTest {
         }
         """;
         webTestClient
-                .put().uri(COMPANY_URL)
+                .put().uri("/api/company")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(creationRequest)
                 .exchange()
@@ -267,7 +266,7 @@ public class CompanyControllerTest {
         }
         """;
         CompanyResponse companyResponse = webTestClient
-                .post().uri(COMPANY_URL)
+                .post().uri("/api/company")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(creationRequest)
@@ -285,7 +284,7 @@ public class CompanyControllerTest {
         """;
         assert companyResponse != null;
         CompanyResponse updateResponse = webTestClient
-                .put().uri(COMPANY_URL + companyResponse.uniqueIdentifier())
+                .put().uri("/api/company/{id}",companyResponse.id())
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(updateRequest)
@@ -311,7 +310,7 @@ public class CompanyControllerTest {
         }
         """;
         webTestClient
-                .put().uri(COMPANY_URL)
+                .put().uri("/api/company")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(updateRequest)
@@ -332,7 +331,7 @@ public class CompanyControllerTest {
         }
         """;
         ApiErrorResponse errorResponse = webTestClient
-                .put().uri(COMPANY_URL + "123")
+                .put().uri("/api/company/{id}", "123")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(updateRequest)
@@ -361,7 +360,7 @@ public class CompanyControllerTest {
         }
         """;
         ApiErrorResponse errorResponse = webTestClient
-                .put().uri(COMPANY_URL + "123")
+                .put().uri("/api/company/{id}" ,"123")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(updateRequest)
@@ -389,7 +388,7 @@ public class CompanyControllerTest {
         }
         """;
         ApiErrorResponse errorResponse = webTestClient
-                .put().uri(COMPANY_URL + "123")
+                .put().uri("/api/company/{id}" ,"123")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(updateRequest)
@@ -419,7 +418,7 @@ public class CompanyControllerTest {
         }
         """;
         ApiErrorResponse errorResponse = webTestClient
-                .put().uri(COMPANY_URL + "123")
+                .put().uri("/api/company/{id}" , "123")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(updateRequest)
@@ -445,7 +444,7 @@ public class CompanyControllerTest {
         }
         """;
         CompanyResponse companyResponse = webTestClient
-                .post().uri(COMPANY_URL)
+                .post().uri("/api/company")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(creationRequest)
@@ -456,7 +455,7 @@ public class CompanyControllerTest {
                 .getResponseBody();
 
         assert companyResponse != null;
-        webTestClient.delete().uri("/api/company/{id}", companyResponse.uniqueIdentifier())
+        webTestClient.delete().uri("/api/company/{id}", companyResponse.id())
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .exchange()
                 .expectStatus().isNoContent(); //204
@@ -493,7 +492,7 @@ public class CompanyControllerTest {
         }
         """;
         CompanyResponse creationResponse = webTestClient
-                .post().uri(COMPANY_URL)
+                .post().uri("/api/company")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(creationRequest)
@@ -504,7 +503,7 @@ public class CompanyControllerTest {
                 .getResponseBody();
 
         assert creationResponse != null;
-        CompanyResponse getResponse = webTestClient.get().uri("/api/company/{id}", creationResponse.uniqueIdentifier())
+        CompanyResponse getResponse = webTestClient.get().uri("/api/company/{id}", creationResponse.id())
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .exchange()
                 .expectStatus().isOk()
@@ -513,7 +512,7 @@ public class CompanyControllerTest {
                 .getResponseBody();
 
         assertThat(getResponse).isNotNull();
-        assertThat(getResponse.uniqueIdentifier()).isEqualTo(creationResponse.uniqueIdentifier());
+        assertThat(getResponse.id()).isEqualTo(creationResponse.id());
     }
 
     @Test
@@ -542,7 +541,7 @@ public class CompanyControllerTest {
 
         String token = obtainAccessToken();
 
-        CompanyPageResponse pageResponse = webTestClient.get().uri("/api/company/?page=1&size=5")
+        CompanyPageResponse pageResponse = webTestClient.get().uri("/api/company?page=1&size=5")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()

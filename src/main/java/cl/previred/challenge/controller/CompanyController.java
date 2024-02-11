@@ -35,10 +35,10 @@ public class CompanyController {
     @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
-    @PostMapping(value = "/")
+    @PostMapping(value = "")
     public ResponseEntity<CompanyResponse> create(@Valid @RequestBody CompanyRequest request) {
         Company response = companyService.create(request);
-        return ResponseEntity.ok(new CompanyResponse(response.getRut(), response.getCompanyName(),response.getId()));
+        return ResponseEntity.ok(new CompanyResponse(response.getId(), response.getRut(), response.getCompanyName()));
     }
 
     @Operation(summary = "Update company")
@@ -49,7 +49,7 @@ public class CompanyController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<CompanyResponse> update(@PathVariable String id, @Valid @RequestBody CompanyRequest request) {
         Company response = companyService.update(id,request);
-        return ResponseEntity.ok(new CompanyResponse(response.getRut(), response.getCompanyName(),response.getId()));
+        return ResponseEntity.ok(new CompanyResponse(response.getId(), response.getRut(), response.getCompanyName()));
     }
 
     @Operation(summary = "Delete company")
@@ -71,7 +71,7 @@ public class CompanyController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<CompanyResponse> get(@PathVariable String id) {
         Company company = companyService.get(id);
-        return ResponseEntity.ok(new CompanyResponse(company.getRut(), company.getCompanyName(),company.getId()));
+        return ResponseEntity.ok(new CompanyResponse(company.getId(), company.getRut(), company.getCompanyName()));
     }
 
     @Operation(summary = "List company")
@@ -79,7 +79,7 @@ public class CompanyController {
     @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
-    @GetMapping(value = "/")
+    @GetMapping(value = "")
     public  ResponseEntity<CompanyPageResponse> list(@RequestParam(defaultValue = "1") int page,
                                                 @RequestParam(defaultValue = "10") int size) {
         Sort.Direction sortDirection = Sort.Direction.fromString("ASC");
