@@ -24,7 +24,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
-public class AuthControllerIntegrationTest {
+class AuthControllerIntegrationTest {
 
     static final String LOGIN_URL = "/api/auth/login";
 
@@ -49,7 +49,7 @@ public class AuthControllerIntegrationTest {
 
     //  Test login endpoint
     @Test
-    public void shouldReturnJWTToken_WhenUserIsRegistered() {
+    void shouldReturnJWTToken_WhenUserIsRegistered() {
 
 
         String loginRequest = """
@@ -74,7 +74,7 @@ public class AuthControllerIntegrationTest {
     }
 
     @Test
-    public void shouldReturnBadCredential() {
+    void shouldReturnBadCredential() {
 
         String loginRequestWithWrongPassword = """
         {
@@ -99,7 +99,7 @@ public class AuthControllerIntegrationTest {
     }
 
     @Test
-    public void shouldReturnUnauthorized_WhenUserNotRegistered() {
+    void shouldReturnUnauthorized_WhenUserNotRegistered() {
         String request = """
         {
           "username": "sebastian",

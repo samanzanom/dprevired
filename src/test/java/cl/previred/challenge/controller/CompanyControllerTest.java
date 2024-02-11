@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
-public class CompanyControllerTest {
+class CompanyControllerTest {
 
     static final String LOGIN_URL = "/api/auth/login";
 
@@ -54,7 +54,7 @@ public class CompanyControllerTest {
 
     // Create
     @Test
-    public void shouldCompanyCreatedNoAuthenticated() {
+    void shouldCompanyCreatedNoAuthenticated() {
         String creationRequest = """
         {
           "rut": "1-9",
@@ -75,7 +75,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldCompanyCreatedAuthenticated() {
+    void shouldCompanyCreatedAuthenticated() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -102,7 +102,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldCompanyCreatedDuplicated() {
+    void shouldCompanyCreatedDuplicated() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -129,7 +129,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldCompanyCreatedFailNoCompanyName() {
+    void shouldCompanyCreatedFailNoCompanyName() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -156,7 +156,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldCompanyCreatedFailCompanyNameLength() {
+    void shouldCompanyCreatedFailCompanyNameLength() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -184,7 +184,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldCompanyCreatedFailNoRut() {
+    void shouldCompanyCreatedFailNoRut() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -212,7 +212,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldCompanyCreatedFailInvalidRut() {
+    void shouldCompanyCreatedFailInvalidRut() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -241,7 +241,7 @@ public class CompanyControllerTest {
 
     // Update
     @Test
-    public void shouldCompanyUpdateNoAuthenticated() {
+    void shouldCompanyUpdateNoAuthenticated() {
 
 
         String updateRequest = """
@@ -264,7 +264,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldCompanyUpdatedSuccessfully() {
+    void shouldCompanyUpdatedSuccessfully() {
         /// First, get token
         String token = obtainAccessToken();
 
@@ -308,7 +308,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldCompanyUpdateWhitOutId() {
+    void shouldCompanyUpdateWhitOutId() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -330,7 +330,7 @@ public class CompanyControllerTest {
 
 
     @Test
-    public void shouldCompanyUpdateFailNoCompanyName() {
+    void shouldCompanyUpdateFailNoCompanyName() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -358,7 +358,7 @@ public class CompanyControllerTest {
 
 
     @Test
-    public void shouldCompanyUpdateFailCompanyNameLength() {
+    void shouldCompanyUpdateFailCompanyNameLength() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -387,7 +387,7 @@ public class CompanyControllerTest {
 
 
     @Test
-    public void shouldCompanyUpdateFailNoRut() {
+    void shouldCompanyUpdateFailNoRut() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -416,7 +416,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldCompanyUpdatedFailInvalidRut() {
+    void shouldCompanyUpdatedFailInvalidRut() {
 
         String token = obtainAccessToken();
 
@@ -443,7 +443,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldReturn204WhenCompanyDeletedSuccessfully() {
+    void shouldReturn204WhenCompanyDeletedSuccessfully() {
         String token = obtainAccessToken();
 
         String creationRequest = """
@@ -471,7 +471,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldReturn404WhenCompanyNotFound() {
+    void shouldReturn404WhenCompanyNotFound() {
         String token = obtainAccessToken();
         String nonExistentCompanyId = "non-existent-id";
 
@@ -482,7 +482,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldDeleteReturn403WhenNotAuthenticated() {
+    void shouldDeleteReturn403WhenNotAuthenticated() {
         String nonAuthenticatedCompanyId = "123";
 
         webTestClient.delete().uri("/api/company/{id}", nonAuthenticatedCompanyId)
@@ -491,7 +491,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void getCompany_ShouldReturnCompanyDetails_WhenCompanyExists() {
+    void getCompany_ShouldReturnCompanyDetails_WhenCompanyExists() {
         String token = obtainAccessToken();
 
         String creationRequest = """
@@ -525,7 +525,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void getCompany_ShouldReturnNotFound_WhenCompanyDoesNotExist() {
+    void getCompany_ShouldReturnNotFound_WhenCompanyDoesNotExist() {
         String nonExistentCompanyId = "nonExistentId";
         String token = obtainAccessToken();
 
@@ -536,7 +536,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void shouldGetReturn403WhenNotAuthenticated() {
+    void shouldGetReturn403WhenNotAuthenticated() {
         String nonExistentCompanyId = "nonExistentId";
 
         webTestClient.get().uri("/api/company/{id}", nonExistentCompanyId)
@@ -546,7 +546,7 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void testListCompaniesReturnsPageInfoAndCompanies() {
+    void testListCompaniesReturnsPageInfoAndCompanies() {
 
         String token = obtainAccessToken();
 

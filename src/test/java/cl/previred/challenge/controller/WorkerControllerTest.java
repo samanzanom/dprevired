@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
-public class WorkerControllerTest {
+class WorkerControllerTest {
 
     static final String LOGIN_URL = "/api/auth/login";
 
@@ -59,7 +59,7 @@ public class WorkerControllerTest {
 
     // Create
     @Test
-    public void shouldWorkerCreatedNoAuthenticated() {
+    void shouldWorkerCreatedNoAuthenticated() {
         String creationRequest = """
                 {
                   "rut": "1-9",
@@ -85,7 +85,7 @@ public class WorkerControllerTest {
 
 
     @Test
-    public void shouldWorkerCreatedAuthenticated() {
+    void shouldWorkerCreatedAuthenticated() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -121,7 +121,7 @@ public class WorkerControllerTest {
 
 
     @Test
-    public void shouldWorkerCreatedDuplicated() {
+    void shouldWorkerCreatedDuplicated() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -169,7 +169,7 @@ public class WorkerControllerTest {
 
 
     @Test
-    public void shouldWorkerCreatedFailNoName() {
+    void shouldWorkerCreatedFailNoName() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -206,7 +206,7 @@ public class WorkerControllerTest {
 
 
     @Test
-    public void shouldWorkerCreatedFailNoRut() {
+    void shouldWorkerCreatedFailNoRut() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -243,7 +243,7 @@ public class WorkerControllerTest {
 
 
     @Test
-    public void shouldCompanyCreatedFailInvalidRut() {
+    void shouldCompanyCreatedFailInvalidRut() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -282,7 +282,7 @@ public class WorkerControllerTest {
 
     // Update
     @Test
-    public void shouldCompanyUpdateNoAuthenticated() {
+    void shouldCompanyUpdateNoAuthenticated() {
 
         // First, get token
         String token = obtainAccessToken();
@@ -317,7 +317,7 @@ public class WorkerControllerTest {
 
 
     @Test
-    public void shouldWorkerUpdatedSuccessfully() {
+    void shouldWorkerUpdatedSuccessfully() {
         /// First, get token
         String token = obtainAccessToken();
 
@@ -373,7 +373,7 @@ public class WorkerControllerTest {
 
 
     @Test
-    public void shouldCompanyUpdateWhitOutId() {
+    void shouldCompanyUpdateWhitOutId() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -402,7 +402,7 @@ public class WorkerControllerTest {
     }
 
     @Test
-    public void shouldCompanyUpdateFailNoRut() {
+    void shouldCompanyUpdateFailNoRut() {
         // First, get token
         String token = obtainAccessToken();
 
@@ -438,7 +438,7 @@ public class WorkerControllerTest {
 
 
     @Test
-    public void shouldCompanyUpdatedFailInvalidRut() {
+    void shouldCompanyUpdatedFailInvalidRut() {
 
         String token = obtainAccessToken();
 
@@ -475,7 +475,7 @@ public class WorkerControllerTest {
 
 
     @Test
-    public void shouldReturn204WhenCompanyDeletedSuccessfully() {
+    void shouldReturn204WhenCompanyDeletedSuccessfully() {
         String token = obtainAccessToken();
 
         CompanyResponse companyResponse = this.createCompany(token);
@@ -511,7 +511,7 @@ public class WorkerControllerTest {
     }
 
     @Test
-    public void shouldReturn404WhenCompanyNotFound() {
+    void shouldReturn404WhenCompanyNotFound() {
         String token = obtainAccessToken();
         Long nonExistentCompanyId = 10L;
 
@@ -522,7 +522,7 @@ public class WorkerControllerTest {
     }
 
     @Test
-    public void shouldDeleteReturn403WhenNotAuthenticated() {
+    void shouldDeleteReturn403WhenNotAuthenticated() {
         Long nonAuthenticatedCompanyId = 123L;
 
         webTestClient.delete().uri("/api/worker/{id}", nonAuthenticatedCompanyId)
@@ -532,7 +532,7 @@ public class WorkerControllerTest {
 
 
     @Test
-    public void getCompany_ShouldReturnWorkerDetails_WhenWorkerExists() {
+    void getCompany_ShouldReturnWorkerDetails_WhenWorkerExists() {
         String token = obtainAccessToken();
 
         CompanyResponse companyResponse = this.createCompany(token);
@@ -574,7 +574,7 @@ public class WorkerControllerTest {
     }
 
     @Test
-    public void getCompany_ShouldReturnNotFound_WhenWorkerDoesNotExist() {
+    void getCompany_ShouldReturnNotFound_WhenWorkerDoesNotExist() {
         Long nonExistentCompanyId = 100L;
         String token = obtainAccessToken();
 
@@ -585,7 +585,7 @@ public class WorkerControllerTest {
     }
 
     @Test
-    public void shouldGetReturn403WhenNotAuthenticated() {
+    void shouldGetReturn403WhenNotAuthenticated() {
         Long nonExistentCompanyId = 200L;
 
         webTestClient.get().uri("/api/worker/{id}", nonExistentCompanyId)
@@ -596,7 +596,7 @@ public class WorkerControllerTest {
 
 
     @Test
-    public void testListWorkersReturnsPageInfoAndWorkers() {
+    void testListWorkersReturnsPageInfoAndWorkers() {
 
         String token = obtainAccessToken();
 
@@ -645,7 +645,7 @@ public class WorkerControllerTest {
     }
 
     @Test
-    public void testListWorkersCompanyReturnsPageInfoAndWorkers() {
+    void testListWorkersCompanyReturnsPageInfoAndWorkers() {
 
         String token = obtainAccessToken();
 
