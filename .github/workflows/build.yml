@@ -9,6 +9,15 @@ jobs:
   build:
     name: Build and analyze
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: previred
+          POSTGRES_USER: previred
+          POSTGRES_PASSWORD: previred.2024
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v3
         with:
@@ -30,8 +39,12 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+      - name: Start Docker Compose services
+        run: docker-compose -f script/docker-compose.yml up -d
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=samanzanom_dprevired
+      - name: Shutdown Docker Compose services
+        run: docker-compose -f script/docker-compose.yml down
