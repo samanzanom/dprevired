@@ -1,30 +1,37 @@
 package cl.previred.challenge.helper;
 
+import cl.previred.challenge.config.JwtConfig;
 import cl.previred.challenge.exceptions.AccessDeniedException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
-import java.security.Key;
+
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.crypto.SecretKey;
+
 public class JwtHelper {
 
-    private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor(JwtConfig.getSecret().getBytes(StandardCharsets.UTF_8));
     private static final int MINUTES = 60;
+
+    private JwtHelper() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static String generateToken(String username) {
         var now = Instant.now();
         return Jwts.builder()
-                .subject(username)
-                .issuedAt(Date.from(now))
+                .claim("sub", username)
+                .claim("iat", Date.from(now))
                 .expiration(Date.from(now.plus(MINUTES, ChronoUnit.MINUTES)))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(SECRET_KEY)
                 .compact();
     }
 
@@ -39,11 +46,10 @@ public class JwtHelper {
 
     private static Claims getTokenBody(String token) {
         try {
-            return Jwts
-                    .parser()
-                    .setSigningKey(SECRET_KEY)
+            return Jwts.parser() // Cambiado para usar parserBuilder()
+                    .verifyWith(SECRET_KEY) // Actualizado según la recomendación
                     .build()
-                    .parseSignedClaims(token)
+                    .parseSignedClaims(token) // También actualizado para usar parseClaimsJws
                     .getPayload();
         } catch (SignatureException | ExpiredJwtException e) { // Invalid signature or expired token
             throw new AccessDeniedException("Access denied: " + e.getMessage());
