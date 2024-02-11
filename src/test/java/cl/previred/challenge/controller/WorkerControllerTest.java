@@ -603,7 +603,7 @@ public class WorkerControllerTest {
               "companyId": "%s"
             }
         """, companyId);
-        WorkerResponse workerResponse = webTestClient
+        webTestClient
                 .post().uri("/api/worker")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
@@ -652,7 +652,7 @@ public class WorkerControllerTest {
               "companyId": "%s"
             }
         """, companyId);
-        WorkerResponse workerResponse = webTestClient
+        webTestClient
                 .post().uri("/api/worker")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
