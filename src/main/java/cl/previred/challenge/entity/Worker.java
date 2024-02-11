@@ -8,26 +8,31 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "companys", schema = "public")
-public class Company {
+@Table(name = "workers", schema = "public")
+public class Worker {
 
     @Id
-    @Column(name = "id", length = 50)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "rut", length = 12)
     private String rut;
 
-    @Column(name = "company_name", length = 200)
-    private String companyName;
+    @Column(name = "names", length = 200)
+    private String names;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Worker> workers = new HashSet<>();
+    @Column(name = "first_surname", length = 100)
+    private String firstSurname;
+
+    @Column(name = "second_surname", length = 100)
+    private String secondSurname;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
 
     @CreatedBy
     private String createdBy;
@@ -41,12 +46,11 @@ public class Company {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
-
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -58,12 +62,36 @@ public class Company {
         this.rut = rut;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getNames() {
+        return names;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setNames(String name) {
+        this.names = name;
+    }
+
+    public String getFirstSurname() {
+        return firstSurname;
+    }
+
+    public void setFirstSurname(String firstSurname) {
+        this.firstSurname = firstSurname;
+    }
+
+    public String getSecondSurname() {
+        return secondSurname;
+    }
+
+    public void setSecondSurname(String secondSurname) {
+        this.secondSurname = secondSurname;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public String getCreatedBy() {
@@ -96,13 +124,5 @@ public class Company {
 
     public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public Set<Worker> getWorkers() {
-        return workers;
-    }
-
-    public void setWorkers(Set<Worker> workers) {
-        this.workers = workers;
     }
 }
