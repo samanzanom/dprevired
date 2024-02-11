@@ -3,6 +3,7 @@ package cl.previred.challenge.service;
 import cl.previred.challenge.controller.dto.CompanyRequest;
 import cl.previred.challenge.entity.Company;
 import cl.previred.challenge.exceptions.DuplicateException;
+import cl.previred.challenge.exceptions.NotFoundException;
 import cl.previred.challenge.repository.CompanyRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +44,16 @@ public class CompanyService {
         company.setId(baseText+dateTime);
         company.setRut(rut);
         company.setCompanyName(request.companyName());
+        return repository.save(company);
+    }
+
+    @Transactional
+    public Company update(String id, CompanyRequest request) {
+        Company company = repository.findById(id).orElseThrow(() ->
+                new NotFoundException(String.format("Company does not exist, id: %s", id)));
+
+        company.setCompanyName(request.companyName());
+        company.setRut(request.rut());
         return repository.save(company);
     }
 }

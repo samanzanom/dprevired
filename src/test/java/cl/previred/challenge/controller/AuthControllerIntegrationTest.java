@@ -2,6 +2,7 @@ package cl.previred.challenge.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import cl.previred.challenge.SingletonPostgresContainer;
 import cl.previred.challenge.controller.dto.ApiErrorResponse;
 import cl.previred.challenge.controller.dto.LoginResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +31,7 @@ public class AuthControllerIntegrationTest {
 
     @Container
     @ServiceConnection
-    private static PostgreSQLContainer postgres = new PostgreSQLContainer<>("postgres:13");
+    private static PostgreSQLContainer postgres = SingletonPostgresContainer.getInstance();
 
     @BeforeEach
     public void cleanup(){

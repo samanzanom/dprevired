@@ -3,6 +3,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CONFLICT;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.Series.CLIENT_ERROR;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 import java.util.ArrayList;
@@ -45,7 +46,12 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ApiErrorResponse> handleNotFoundException(NotFoundException e) {
-        return ResponseEntity.status(NOT_FOUND).body(new ApiErrorResponse(NOT_FOUND.value(), "Invalid username or password"));
+        return ResponseEntity.status(NOT_FOUND).body(new ApiErrorResponse(NOT_FOUND.value(), "Not found"));
+    }
+
+    @ExceptionHandler(DuplicateException.class)
+    public ResponseEntity<ApiErrorResponse> handleDuplicateException(DuplicateException e) {
+        return ResponseEntity.status(BAD_REQUEST).body(new ApiErrorResponse(BAD_REQUEST.value(), "Duplicated Element"));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
