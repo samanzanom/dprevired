@@ -3,6 +3,7 @@ package cl.previred.challenge.component;
 import cl.previred.challenge.entity.User;
 import cl.previred.challenge.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,9 @@ public class DataLoader implements CommandLineRunner {
 
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
+
+    @Value("${default.admin.password}")
+    private String defaultAdminPassword;
 
     @Autowired
     public DataLoader(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -29,7 +33,7 @@ public class DataLoader implements CommandLineRunner {
         if(usuarioExistente.isEmpty()) {
             User newUser = new User();
             newUser.setUsername("admin");
-            newUser.setPassword(passwordEncoder.encode("123456"));
+            newUser.setPassword(passwordEncoder.encode(defaultAdminPassword));
             userRepository.save(newUser);
         }
     }
