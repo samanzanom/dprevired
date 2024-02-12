@@ -9,6 +9,7 @@ import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 
 import java.nio.charset.StandardCharsets;
+
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -18,7 +19,10 @@ import javax.crypto.SecretKey;
 
 public class JwtHelper {
 
-    private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor(JwtConfig.getSecret().getBytes(StandardCharsets.UTF_8));
+    private static SecretKey SECRET_KEY;
+    public static void setSecretKey(String secret) {
+        SECRET_KEY = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
     private static final int MINUTES = 60;
 
     private JwtHelper() {

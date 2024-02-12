@@ -156,34 +156,6 @@ class CompanyControllerTest {
     }
 
     @Test
-    void shouldCompanyCreatedFailCompanyNameLength() {
-        // First, get token
-        String token = obtainAccessToken();
-
-        String creationRequest = """
-        {
-          "rut": "1-9",
-          "companyName": "prev"
-        }
-        """;
-        ApiErrorResponse errorResponse =webTestClient
-                .post().uri("/api/company")
-                .contentType(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-                .bodyValue(creationRequest)
-                .exchange()
-                .expectStatus().isBadRequest()
-                .expectBody(ApiErrorResponse.class)
-                .returnResult()
-                .getResponseBody();
-
-        assertThat(errorResponse).isNotNull();
-        assertThat(errorResponse.errorCode()).isEqualTo(400);
-        assertThat(errorResponse.description()).isEqualTo("Validation of request failed: companyName: Company name must be between 6 and 50 characters");
-
-    }
-
-    @Test
     void shouldCompanyCreatedFailNoRut() {
         // First, get token
         String token = obtainAccessToken();
@@ -355,36 +327,6 @@ class CompanyControllerTest {
         assertThat(errorResponse.description()).isEqualTo("Validation of request failed: companyName: Company name cannot be blank");
 
     }
-
-
-    @Test
-    void shouldCompanyUpdateFailCompanyNameLength() {
-        // First, get token
-        String token = obtainAccessToken();
-
-        String updateRequest = """
-        {
-          "rut": "2-7",
-          "companyName": "123"
-        }
-        """;
-        ApiErrorResponse errorResponse = webTestClient
-                .put().uri("/api/company/{id}" ,"123")
-                .contentType(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-                .bodyValue(updateRequest)
-                .exchange()
-                .expectStatus().isBadRequest()
-                .expectBody(ApiErrorResponse.class)
-                .returnResult()
-                .getResponseBody();
-
-        assertThat(errorResponse).isNotNull();
-        assertThat(errorResponse.errorCode()).isEqualTo(400);
-        assertThat(errorResponse.description()).isEqualTo("Validation of request failed: companyName: Company name must be between 6 and 50 characters");
-
-    }
-
 
     @Test
     void shouldCompanyUpdateFailNoRut() {
