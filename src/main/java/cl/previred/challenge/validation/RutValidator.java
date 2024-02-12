@@ -10,6 +10,7 @@ public class RutValidator implements ConstraintValidator<ValidRut, String> {
 
     @Override
     public void initialize(ValidRut constraintAnnotation) {
+        // No initialization required for this validator.
     }
 
     /**

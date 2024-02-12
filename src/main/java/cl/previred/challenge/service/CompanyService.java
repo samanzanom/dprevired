@@ -20,7 +20,7 @@ public class CompanyService {
 
     private final CompanyRepository repository;
 
-    private static String NOT_FOUND_EXCEPTION = "Company does not exist, id: %s";
+    private static final String NOT_FOUND_EXCEPTION = "Company does not exist, id: %s";
 
     public CompanyService(CompanyRepository repository) {
         this.repository = repository;

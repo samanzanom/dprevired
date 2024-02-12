@@ -18,6 +18,8 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class WorkerService {
 
+    private static final String NOT_FOUND_EXCEPTION = "Worker does not exist, id: %s";
+
     private final WorkerRepository repository;
     private final CompanyRepository companyRepository;
 
@@ -55,7 +57,7 @@ public class WorkerService {
     @Transactional
     public Worker update(Long id, WorkerRequest request) {
         Worker worker = repository.findById(id).orElseThrow(() ->
-                new NotFoundException(String.format("Worker does not exist, id: %s", id)));
+                new NotFoundException(String.format(NOT_FOUND_EXCEPTION, id)));
 
         worker.setRut(request.rut());
         worker.setNames(request.names());
@@ -67,13 +69,13 @@ public class WorkerService {
     @Transactional
     public void delete(Long id) {
         Worker worker = repository.findById(id).orElseThrow(() ->
-                new NotFoundException(String.format("Worker does not exist, id: %s", id)));
+                new NotFoundException(String.format(NOT_FOUND_EXCEPTION, id)));
         repository.delete(worker);
     }
 
     public Worker get(Long id) {
         return repository.findById(id).orElseThrow(() ->
-                new NotFoundException(String.format("Worker does not exist, id: %s", id)));
+                new NotFoundException(String.format(NOT_FOUND_EXCEPTION, id)));
     }
 
     public Page<Worker> findAll(Pageable pageable) {

@@ -1,7 +1,5 @@
 package cl.previred.challenge.repository;
 
-
-import cl.previred.challenge.entity.Company;
 import cl.previred.challenge.entity.Worker;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
