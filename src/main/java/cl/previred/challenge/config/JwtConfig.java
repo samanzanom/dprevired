@@ -6,14 +6,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JwtConfig {
 
-    private static String secret;
+    // Ahora es un campo de instancia
+    private String secret;
 
     @Value("${jwt.secret}")
     public void setSecret(String secret) {
-        JwtConfig.secret = secret;
+        this.secret = secret;
     }
 
-    public static String getSecret() {
+    public String getSecret() {
         return secret;
     }
 }

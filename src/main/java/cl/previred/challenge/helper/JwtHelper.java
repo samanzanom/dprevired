@@ -1,6 +1,5 @@
 package cl.previred.challenge.helper;
 
-import cl.previred.challenge.config.JwtConfig;
 import cl.previred.challenge.exceptions.AccessDeniedException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
