@@ -16,6 +16,7 @@ backend/.springBeans
 backend/.sts4-cache
 
 # IntelliJ IDEA
+
 backend/.idea/
 backend/*.iws
 backend/*.iml
