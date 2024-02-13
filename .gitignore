@@ -63,10 +63,10 @@ backend/.vscode/
 
 # Angular Visual Studio Code
 /frontend/.vscode/*
-!/frontend/.vscode/settings.json
-!/frontend/.vscode/tasks.json
-!/frontend/.vscode/launch.json
-!/frontend/.vscode/extensions.json
+/frontend/.vscode/settings.json
+/frontend/.vscode/tasks.json
+/frontend/.vscode/launch.json
+/frontend/.vscode/extensions.json
 /frontend/.history/*
 
 # Angular Miscellaneous
@@ -79,6 +79,7 @@ backend/.vscode/
 /frontend/typings/
 /frontend/node_modules/
 /frontend/node/
+/frontend/.vscode
 
 # Angular System files
 /frontend/.DS_Store
