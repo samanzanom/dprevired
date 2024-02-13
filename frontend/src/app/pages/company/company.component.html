@@ -39,6 +39,55 @@
       </ol>
       <h6 class="slim-pagetitle">Empresas</h6>
     </div><!-- slim-pageheader -->
+    <div class="section-wrapper mg-t-20">
+      <!--label class="section-title">Hoverable Rows</label>
+      <p class="mg-b-20 mg-sm-b-40">To enable a hover state on table rows.</p-->
+
+      <div class="table-responsive">
+        <table class="table table-hover mg-b-0 table-bordered">
+          <thead>
+          <tr>
+            <th class="wd-15p">ID</th>
+            <th class="wd-15p">RUT</th>
+            <th class="wd-20p">Empresa</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let c of companies | paginate: config">
+            <td>{{ c.id }}</td>
+            <td>{{ c.rut }}</td>
+            <td>{{ c.companyName }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="pagination-wrapper">
+          <pagination-controls [id]="'advanced'"
+                               [maxSize]="maxSize"
+                               [directionLinks]="directionLinks"
+                               [autoHide]="autoHide"
+                               [responsive]="responsive"
+                               [previousLabel]="labels.previousLabel"
+                               [nextLabel]="labels.nextLabel"
+                               [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                               [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                               [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                               (pageChange)="onPageChange($event)"
+                               (pageBoundsCorrection)="onPageBoundsCorrection($event)"></pagination-controls>
+        </div><!-- pagination-wrapper -->
+      </div>
+      <div class="section-wrapper">
+        <div class="row">
+          <div class="col-sm-6 col-md-3"></div><!-- col-sm-3 -->
+          <div class="col-sm-6 col-md-3"></div><!-- col-sm-3 -->
+          <div class="col-sm-6 col-md-3"></div><!-- col-sm-3 -->
+          <div class="col-sm-6 col-md-3">
+            <div class="btn-demo">
+              <button class="btn btn-primary btn-block mg-b-10">Nueva Empresa</button>
+            </div><!-- btn-demo -->
+          </div><!-- col-sm-3 -->
+        </div><!-- row -->
+      </div><!-- section-wrapper -->
+    </div>
 
   </div><!-- container -->
 </div><!-- slim-mainpanel -->
