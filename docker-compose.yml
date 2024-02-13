@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:13
+    environment:
+      POSTGRES_USER: previred
+      POSTGRES_PASSWORD: previred.2024
+      POSTGRES_DB: previred
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGDATA: /data/postgres
+    volumes:
+      - ./postgres/data:/data/postgres
+      - ./initdb:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+      
+  app:
+    container_name: springboot-app
+    build:
+      context: ./backend # Asumiendo que tu Dockerfile está en la carpeta backend
+      dockerfile: Dockerfile # Asegúrate de tener un Dockerfile válido aquí
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/previred
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-previred}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-previred.2024}
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080" # El puerto 8080 del contenedor se mapea al puerto 8080 de tu host

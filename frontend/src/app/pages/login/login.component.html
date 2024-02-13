@@ -1,0 +1,16 @@
+<div class="signin-wrapper">
+  <div class="signin-box">
+    <h2 class="slim-logo"><a href="index.html">Previred<span></span></a></h2>
+    <h2 class="signin-title-primary">Bienvenido</h2>
+    <h3 class="signin-title-secondary">Ingresa tus credenciales para continuar.</h3>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input type="text" formControlName="username" class="form-control" placeholder="Username">
+      </div><!-- form-group -->
+      <div class="form-group mg-b-50">
+        <input type="password" formControlName="password" class="form-control" placeholder="Contraseña">
+      </div><!-- form-group -->
+      <button class="btn btn-primary btn-block btn-signin">Ingresar</button>
+    </form>
+  </div><!-- signin-box -->
+</div><!-- signin-wrapper -->
