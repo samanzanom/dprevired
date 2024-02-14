@@ -13,7 +13,6 @@ export class CompanyService {
   constructor(private http: HttpClient) {
 
   }
-
   list(page: number, size: number) {
     return this.http.get<PagedResponse>(`${environment.apiUrl}/api/company?page=${page}&size=${size}`)
       .pipe(map(company => {

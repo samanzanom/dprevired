@@ -129,7 +129,20 @@ Esto te permitirá ver todos los endpoints disponibles, sus especificaciones y p
 
 	ng serve
 	
-La aplicación Angular ahora estará corriendo y accesible en `http://localhost:4200`.
+La aplicación Angular ahora estará corriendo y accesible en http://localhost:4200.
+
+### Acceso a la Aplicación
+
+Una vez que la aplicación Angular está corriendo, puedes acceder a la interfaz de usuario iniciando sesión en la siguiente dirección:
+
+URL de Inicio de Sesión: http://localhost:4200/login
+
+Usa las siguientes credenciales para iniciar sesión:
+
+Nombre de Usuario: admin
+Contraseña: 123456
+Estas credenciales te permitirán acceder al panel de control y comenzar a utilizar las funcionalidades de la aplicación.
+
 
 ## Construido con
 

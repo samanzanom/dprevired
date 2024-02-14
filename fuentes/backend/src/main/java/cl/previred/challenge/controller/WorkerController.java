@@ -73,7 +73,7 @@ public class WorkerController {
     }
 
     @Operation(summary = "List workers")
-    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = CompanyPageResponse.class)))
+    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = WorkerPageResponse.class)))
     @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))

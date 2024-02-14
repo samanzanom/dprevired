@@ -1,8 +1,7 @@
-import {Company} from "./company";
-
+import {Worker} from "./worker";
 
 export interface PagedResponse {
-  companies: Company[];
+  workers: Worker[];
   currentPage: number;
   totalItems: number;
   totalPages: number;

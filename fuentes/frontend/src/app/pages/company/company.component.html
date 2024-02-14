@@ -57,6 +57,7 @@
             <th class="wd-20p">Empresa</th>
             <th class="wd-10p"></th>
             <th class="wd-10p"></th>
+            <th class="wd-10p"></th>
           </tr>
           </thead>
           <tbody>
@@ -64,6 +65,7 @@
             <td>{{ c.id }}</td>
             <td>{{ c.rut }}</td>
             <td>{{ c.companyName }}</td>
+            <td><button class="btn btn-secondary btn-block mg-b-10" (click)="viewWorkers(c)" >Trabajadores</button></td>
             <td><button class="btn btn-danger btn-block mg-b-10" (click)="eliminar(c)" >Eliminar</button></td>
             <td><button class="btn btn-primary btn-block" (click)="editar(c)" >Editar</button></td>
           </tr>
@@ -173,5 +175,93 @@
   <div *nzModalFooter>
     <button nz-button nzType="default" (click)="handleCancelEdit()">Cancelar</button>
     <button nz-button nzType="primary" (click)="handleOkEdit()" [nzLoading]="isConfirmLoading">Editar</button>
+  </div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isVisibleWorkers" nzTitle="Trabajadoresde empresa"
+          (nzOnCancel)="handleCancelCWorker()" nzWidth="1000px" style="z-index: 200">
+  <div *nzModalContent>
+    <div class="section-wrapper mg-t-20">
+      <label class="section-title">Trabajadores</label>
+      <p class="mg-b-20 mg-sm-b-40"><button nz-button nzType="default" (click)="createWorker()">Nuevo</button></p>
+
+      <div class="table-responsive">
+        <table class="table table-hover mg-b-0 table-bordered">
+          <thead>
+          <tr>
+            <th class="wd-15p">ID</th>
+            <th class="wd-15p">RUT</th>
+            <th class="wd-20p">Nombre</th>
+            <th class="wd-10p">Apellido P.</th>
+            <th class="wd-10p">Apellido M.</th>
+            <th class="wd-10p"></th>
+            <th class="wd-10p"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let w of workers">
+            <td>{{ w.id }}</td>
+            <td>{{ w.rut }}</td>
+            <td>{{ w.names }}</td>
+            <td>{{ w.firstSurname }}</td>
+            <td>{{ w.secondSurname }}</td>
+            <td><button class="btn btn-danger btn-block mg-b-10" (click)="deleteWorker(w)" >Eliminar</button></td>
+            <td><button class="btn btn-primary btn-block" (click)="editarWorker(w)" >Editar</button></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancelWorker()">Cerrar</button>
+    <!--button nz-button nzType="primary" (click)="handleOkEdit()" [nzLoading]="isConfirmLoading">Editar</button-->
+  </div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isVisibleCWorker" nzTitle="Creaci&oacute;n de empleado"
+          (nzOnCancel)="handleCancelWorker()" style="z-index: 1000">
+  <div *nzModalContent>
+    <div class="form-layout form-layout-7">
+      <div class="row no-gutters">
+        <div class="col-5 col-sm-4">
+          Nombres:
+        </div><!-- col-4 -->
+        <div class="col-7 col-sm-8">
+          <input class="form-control" type="text" name="name" placeholder="Nombres" [(ngModel)]="names">
+        </div><!-- col-8 -->
+      </div><!-- row -->
+      <div class="row no-gutters">
+        <div class="col-5 col-sm-4">
+          A. Paterno:
+        </div><!-- col-4 -->
+        <div class="col-7 col-sm-8">
+          <input class="form-control" type="text" name="name" placeholder="Apellido Paterno" [(ngModel)]="firstSurname">
+        </div><!-- col-8 -->
+      </div><!-- row -->
+      <div class="row no-gutters">
+        <div class="col-5 col-sm-4">
+          A. Materno:
+        </div><!-- col-4 -->
+        <div class="col-7 col-sm-8">
+          <input class="form-control" type="text" name="name" placeholder="Apellido Materno" [(ngModel)]="secondSurname">
+        </div><!-- col-8 -->
+      </div><!-- row -->
+      <div class="row no-gutters">
+        <div class="col-5 col-sm-4">
+          Rut:
+        </div><!-- col-4 -->
+        <div class="col-7 col-sm-8">
+          <input class="form-control" type="text" name="rut" placeholder="15722520-0" [(ngModel)]="rutWorker">
+          <ul class="parsley-errors-list filled" id="error-rut-w" *ngIf="errorRut">
+            <li class="parsley-required">{{errorRutMsg}}</li>
+          </ul>
+        </div><!-- col-8 -->
+      </div><!-- row -->
+    </div><!-- form-layout -->
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancelWorker()">Cancelar</button>
+    <button nz-button nzType="primary" (click)="handleOkWorker()" [nzLoading]="isConfirmLoading">Crear</button>
   </div>
 </nz-modal>

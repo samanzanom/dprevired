@@ -73,7 +73,7 @@ public class CompanyController {
         return ResponseEntity.ok(CompanyResponse.convertToDTO(company));
     }
 
-    @Operation(summary = "List company")
+    @Operation(summary = "List companys")
     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = CompanyPageResponse.class)))
     @ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))

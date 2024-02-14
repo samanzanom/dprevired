@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {CompanyService} from "../../services/company.service";
 import {Company} from "../../_model/company";
+import {Worker} from "../../_model/worker";
 import {PaginationInstance} from "ngx-pagination";
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
 import {LoginService} from "../../services/login.service";
+import {WorkerService} from "../../services/worker.service";
 
 @Component({
   selector: 'app-company',
@@ -15,6 +17,7 @@ export class CompanyComponent implements OnInit {
 
   username: string | undefined = "";
   companies: Company[] = [];
+  workers: Worker[] = [];
   // @ts-ignore
   totalItems: number;
   p:  number = 1;
@@ -37,16 +40,24 @@ export class CompanyComponent implements OnInit {
   };
   isVisible = false;
   isVisibleEdit: boolean = false;
+  isVisibleWorkers: boolean = false;
+  isVisibleCWorker: boolean = false;
   isConfirmLoading = false;
   companyName: string = "";
+  names: string = "";
+  firstSurname: string = "";
+  secondSurname: string = "";
+  rutWorker: string = "";
   rut: string = "";
   errorRS: boolean = false;
   errorRut: boolean = false;
   errorRSMsg: string = "";
   errorRutMsg: string = "";
   editableCompany: Company  = new Company();
+  nzIndex: number=100;
 
   constructor(private companyService: CompanyService,
+              private workerService: WorkerService,
               private modal: NzModalService,
               private loginService : LoginService,) {
   }
@@ -141,6 +152,10 @@ export class CompanyComponent implements OnInit {
       });
   }
 
+  handleOkWorker() {
+
+  }
+
   validarRut(rutCompleto: string): boolean {
     if (!/.*-\dK?$/i.test(rutCompleto)) {
       return false; // No tiene un "-" seguido por un dígito o una K al final
@@ -175,6 +190,14 @@ export class CompanyComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
+  }
+
+  handleCancelWorker(): void {
+    this.isVisibleWorkers = false;
+  }
+
+  handleCancelCWorker(): void {
+    this.isVisibleCWorker = false;
   }
 
   showModal1(): void {
@@ -296,5 +319,37 @@ export class CompanyComponent implements OnInit {
           this.isConfirmLoading = false;
         }
       });
+  }
+
+  viewWorkers(c: Company) {
+    this.workerService.listCompany(1,100,c.id).subscribe({
+      next: (resp) => {
+        this.workers = resp.workers;
+        this.totalItems = resp.totalItems;
+        this.config.totalItems = resp.totalItems;
+        this.config.currentPage = resp.currentPage;
+        this.isVisibleWorkers = true;
+      },
+      error: (error) => {
+        console.log(error);
+        this.modal.error({
+          nzTitle: 'Error',
+          nzContent: 'Algo salió mal al intentar obtener los trabajadores de la empresa'
+        });
+      }
+    });
+
+  }
+
+  deleteWorker(w: Worker) {
+
+  }
+
+  editarWorker(w: Worker) {
+
+  }
+
+  createWorker() {
+    this.isVisibleCWorker = true;
   }
 }
