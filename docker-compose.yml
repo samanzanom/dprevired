@@ -12,14 +12,14 @@ services:
       PGDATA: /data/postgres
     volumes:
       - ./postgres/data:/data/postgres
-      - ./initdb:/docker-entrypoint-initdb.d
+      - ./script:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
       
   app:
     container_name: springboot-app
     build:
-      context: ./backend
+      context: ./fuentes/backend
       dockerfile: Dockerfile
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/previred
@@ -33,7 +33,7 @@ services:
   angular-app:
     container_name: angular-frontend
     build:
-      context: ./frontend
+      context: ./fuentes/frontend
       dockerfile: Dockerfile
     ports:
       - "4200:80" # Cambia 4200 a 80 si prefieres usar el puerto estándar para HTTP

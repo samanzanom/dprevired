@@ -64,7 +64,7 @@ Abre una terminal o consola de comandos.
 	
 1. Ejecuta el script `init-db.sql` utilizando el comando psql:
    ```shell
-   psql -U nombre_de_usuario -d nombre_de_base_de_datos -a -f initdb/init-db.sql
+   psql -U nombre_de_usuario -d nombre_de_base_de_datos -a -f script/init-db.sql
    ```
 
 
@@ -85,7 +85,7 @@ Abre una terminal o consola de comandos.
 3. Navegar al directorio de la aplicación Spring Boot
 
 	```shell
-	cd backend
+	cd fuentes/backend
 	```
 	
 4. Ejecutar la aplicación
@@ -94,8 +94,21 @@ Abre una terminal o consola de comandos.
     ./mvnw spring-boot:run
 	```
 	
-
 La aplicación Spring Boot ahora estará corriendo y accesible en `http://localhost:8080`.
+	
+### Documentación de la API con Swagger
+
+La aplicación Spring Boot está configurada con Swagger para ofrecer una documentación interactiva de la API. Puedes acceder a la interfaz de usuario de Swagger para explorar los endpoints disponibles y probarlos directamente desde tu navegador una vez que la aplicación esté corriendo.
+
+Para acceder a la documentación de Swagger, navega a:
+
+	```shell
+	http://localhost:8080/swagger-ui.html
+	```
+	
+	
+Esto te permitirá ver todos los endpoints disponibles, sus especificaciones y probar las distintas operaciones de la API de forma interactiva.
+
 
 ### Ejecución Local de la Aplicación Angular
 
