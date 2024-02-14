@@ -39,25 +39,33 @@ Asegúrate de tener instalado PostgreSQL en tu máquina local y de que esté cor
 
 Abre una terminal o consola de comandos.
 
-Navega al directorio que contiene los scripts de la base de datos:
+1. Navega al directorio que contiene los scripts de la base de datos:
 
-	`cd ./initdb`
+	cd ./initdb
+	
+2. Ejecuta el script `init-db.sql` utilizando el comando psql:
+   ```shell
+   psql -U nombre_de_usuario -d nombre_de_base_de_datos -a -f initdb/init-db.sql
+   ```
+
 
 ### Ejecución Local de la Aplicación Spring Boot
 
 1. Clonar el repositorio
 
-    `git clone https://github.com/samanzanom/dprevired.git`
+    ```shell
+	git clone https://github.com/samanzanom/dprevired.git
+	```
 	 
 2. Navegar al directorio del proyecto
 
-    `cd dprevired`
+    cd dprevired
 
-1. Navegar al directorio de la aplicación Spring Boot
+3. Navegar al directorio de la aplicación Spring Boot
 
 	cd backend	
 	
-2. Ejecutar la aplicación
+4. Ejecutar la aplicación
 
     ./mvnw spring-boot:run
 	
