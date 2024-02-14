@@ -41,17 +41,17 @@ Abre una terminal o consola de comandos.
 
 Navega al directorio que contiene los scripts de la base de datos:
 
-cd ./initdb
+	`cd ./initdb`
 
 ### Ejecución Local de la Aplicación Spring Boot
 
 1. Clonar el repositorio
 
-    git clone https://github.com/samanzanom/dprevired.git
+    `git clone https://github.com/samanzanom/dprevired.git`
 	 
 2. Navegar al directorio del proyecto
 
-    cd dprevired
+    `cd dprevired`
 
 1. Navegar al directorio de la aplicación Spring Boot
 
@@ -89,4 +89,4 @@ La aplicación Angular ahora estará corriendo y accesible en `http://localhost:
 
 ## Autor
 
-- **Sebastian Manzano** - *Analista Programador Senior* - [amanzanom](https://github.com/samanzanom)
+- **Sebastian Manzano** - *Analista Programador Senior* - [samanzanom](https://github.com/samanzanom)
