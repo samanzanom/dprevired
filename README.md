@@ -31,6 +31,7 @@ Para instalar y ejecutar este proyecto localmente, necesitarás las siguientes h
 - JDK 17
 - Node.js v18.18
 - npm v9
+- PostgreSQL (Verificar con `psql --version`)
 
 Asegúrate de tener instaladas estas versiones específicas para evitar problemas de incompatibilidad. Puedes verificar tu versión actual de cada herramienta con los siguientes comandos en tu terminal:
 
@@ -51,44 +52,56 @@ Asegúrate de tener instaladas estas versiones específicas para evitar problema
   ```shell
   npm -v
   ``` 
-  
+ 
+- Para Postgres:
+ 
+  ```shell
+  psql --version
+  ```
 
 ### Configuración de la Base de Datos
 
 Antes de ejecutar las aplicaciones localmente, es necesario configurar la base de datos. Sigue los pasos a continuación para ejecutar los scripts necesarios que crearán la base de datos, el usuario, los permisos de usuario, y las tablas necesarias.
 
+
 Asegúrate de tener instalado PostgreSQL en tu máquina local y de que esté corriendo.
 
-Abre una terminal o consola de comandos.
+1.- Abre una terminal o consola de comandos.
 
-	
-1. Ejecuta el script `init-db.sql` utilizando el comando psql:
-   ```shell
-   psql -U nombre_de_usuario -d nombre_de_base_de_datos -a -f script/init-db.sql
-   ```
+2.- Clonar el repositorio
+
+	```shell
+	git clone https://github.com/samanzanom/dprevired.git
+	``` 
+
+3.- Ejecuta el script init-db.sql utilizando el comando psql. En este paso, es importante reemplazar nombre_de_usuario con el nombre del usuario maestro de tu base de datos PostgreSQL. Este usuario es aquel que tiene permisos para crear bases de datos, usuarios y asignar permisos en PostgreSQL. Si no estás seguro de cuál es, por defecto podría ser postgres en una instalación típica de PostgreSQL. El comando para ejecutar el script sería entonces:
+
+	```shell
+	psql -U nombre_de_usuario -a -f ./dprevired/scripts/init-db.sql
+	```
+
+	Donde nombre_de_usuario corresponde al usuario maestro de la base de datos PostgreSQL que tengas instalado en tu sistema. Este usuario es esencial para realizar las operaciones de creación y configuración inicial de la base de datos necesaria para la aplicación.
+
+Siguiendo estos pasos, aseguras que cualquier persona que esté configurando la aplicación entienda la necesidad de utilizar el usuario correcto de PostgreSQL para la inicialización de la base de datos.
 
 
 ### Ejecución Local de la Aplicación Spring Boot
 
-1. Clonar el repositorio
 
-    ```shell
-	git clone https://github.com/samanzanom/dprevired.git
-	```
 	 
-2. Navegar al directorio del proyecto
+1.- Navegar al directorio donde clonaste el proyecto y muevete a la carpeta del proyecto
 
 	```shell
     cd dprevired
 	```
 
-3. Navegar al directorio de la aplicación Spring Boot
+2.- Navegar al directorio de la aplicación Spring Boot
 
 	```shell
 	cd fuentes/backend
 	```
 	
-4. Ejecutar la aplicación
+3.- Ejecutar la aplicación
 
 	```shell
     ./mvnw spring-boot:run
@@ -102,9 +115,7 @@ La aplicación Spring Boot está configurada con Swagger para ofrecer una docume
 
 Para acceder a la documentación de Swagger, navega a:
 
-	```shell
 	http://localhost:8080/swagger-ui.html
-	```
 	
 	
 Esto te permitirá ver todos los endpoints disponibles, sus especificaciones y probar las distintas operaciones de la API de forma interactiva.
@@ -112,25 +123,26 @@ Esto te permitirá ver todos los endpoints disponibles, sus especificaciones y p
 
 ### Ejecución Local de la Aplicación Angular
 
-1. Navegar al directorio de la aplicación Angular
+1.- Abre una nueva terminal o consola de comandos.
+
+2.- Navegar al directorio de la aplicación Angular
 
 	```shell
-    cd ../frontend
+    cd /dprevired/fuentes/frontend
 	```
 	
-2. Instalar las dependencias
+3.- Instalar las dependencias
 
 	```shell
     npm install
 	```
 	
-3. Ejecutar la aplicación
+4.- Ejecutar la aplicación
 
 	```shell
 	ng serve
 	```
 	
-
 La aplicación Angular ahora estará corriendo y accesible en `http://localhost:4200`.
 
 ## Construido con
