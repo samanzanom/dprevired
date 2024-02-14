@@ -25,11 +25,33 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 
 ### Prerrequisitos
 
-Lo que necesitas para instalar el software y cómo instalarlo:
+Para instalar y ejecutar este proyecto localmente, necesitarás las siguientes herramientas y versiones:
 
 - Git
-- JDK (para ejecución local de Spring Boot)
-- Node.js y npm (para ejecución local de Angular)
+- JDK 17
+- Node.js v18.18
+- npm v9
+
+Asegúrate de tener instaladas estas versiones específicas para evitar problemas de incompatibilidad. Puedes verificar tu versión actual de cada herramienta con los siguientes comandos en tu terminal:
+
+- Para JDK:
+
+  ```shell
+  java -version
+  ```
+  
+- Para Node.js:
+
+  ```shell
+  node -v
+  ``` 
+  
+- Para npm:
+
+  ```shell
+  npm -v
+  ``` 
+  
 
 ### Configuración de la Base de Datos
 
@@ -39,11 +61,8 @@ Asegúrate de tener instalado PostgreSQL en tu máquina local y de que esté cor
 
 Abre una terminal o consola de comandos.
 
-1. Navega al directorio que contiene los scripts de la base de datos:
-
-	cd ./initdb
 	
-2. Ejecuta el script `init-db.sql` utilizando el comando psql:
+1. Ejecuta el script `init-db.sql` utilizando el comando psql:
    ```shell
    psql -U nombre_de_usuario -d nombre_de_base_de_datos -a -f initdb/init-db.sql
    ```
@@ -59,15 +78,21 @@ Abre una terminal o consola de comandos.
 	 
 2. Navegar al directorio del proyecto
 
+	```shell
     cd dprevired
+	```
 
 3. Navegar al directorio de la aplicación Spring Boot
 
-	cd backend	
+	```shell
+	cd backend
+	```
 	
 4. Ejecutar la aplicación
 
+	```shell
     ./mvnw spring-boot:run
+	```
 	
 
 La aplicación Spring Boot ahora estará corriendo y accesible en `http://localhost:8080`.
@@ -76,15 +101,21 @@ La aplicación Spring Boot ahora estará corriendo y accesible en `http://localh
 
 1. Navegar al directorio de la aplicación Angular
 
+	```shell
     cd ../frontend
+	```
 	
 2. Instalar las dependencias
 
+	```shell
     npm install
+	```
 	
 3. Ejecutar la aplicación
 
+	```shell
 	ng serve
+	```
 	
 
 La aplicación Angular ahora estará corriendo y accesible en `http://localhost:4200`.
