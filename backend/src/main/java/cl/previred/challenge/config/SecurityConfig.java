@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .cors(cors -> cors
                         .configurationSource(request -> {
                             CorsConfiguration config = new CorsConfiguration();
-                            config.setAllowedOrigins(Arrays.asList("http://localhost:4200")); // Angular CLI `ng serve` usa :4200 por defecto
+                            config.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://localhost","http://localhost:80")); // Angular CLI `ng serve` usa :4200 por defecto
                             config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                             config.setAllowedHeaders(Arrays.asList("*"));
                             return config;

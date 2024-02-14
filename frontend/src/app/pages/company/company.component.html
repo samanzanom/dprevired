@@ -25,7 +25,12 @@
       </div><!-- dropdown -->
       <div class="dropdown dropdown-c">
         <a href="#" class="logged-user" data-toggle="dropdown">
-          <span>Katherine</span>
+          <span>{{username}}</span>
+        </a>
+      </div><!-- dropdown -->
+      <div class="dropdown dropdown-c">
+        <a href="#" class="logged-user" data-toggle="dropdown">
+          <span (click)="logout()">logout</span>
         </a>
       </div><!-- dropdown -->
     </div><!-- header-right -->
@@ -50,6 +55,8 @@
             <th class="wd-15p">ID</th>
             <th class="wd-15p">RUT</th>
             <th class="wd-20p">Empresa</th>
+            <th class="wd-10p"></th>
+            <th class="wd-10p"></th>
           </tr>
           </thead>
           <tbody>
@@ -57,6 +64,8 @@
             <td>{{ c.id }}</td>
             <td>{{ c.rut }}</td>
             <td>{{ c.companyName }}</td>
+            <td><button class="btn btn-danger btn-block mg-b-10" (click)="eliminar()" >Eliminar</button></td>
+            <td><button class="btn btn-primary btn-block" (click)="editar()" >Editar</button></td>
           </tr>
           </tbody>
         </table>
@@ -82,7 +91,7 @@
           <div class="col-sm-6 col-md-3"></div><!-- col-sm-3 -->
           <div class="col-sm-6 col-md-3">
             <div class="btn-demo">
-              <button class="btn btn-primary btn-block mg-b-10">Nueva Empresa</button>
+              <button class="btn btn-primary btn-block mg-b-10" (click)="showModal1()" >Nueva Empresa</button>
             </div><!-- btn-demo -->
           </div><!-- col-sm-3 -->
         </div><!-- row -->
@@ -101,3 +110,35 @@
 
 </body>
 </html>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Creaci&oacute;n de empresa" (nzOnCancel)="handleCancel()">
+  <div *nzModalContent>
+      <div class="form-layout form-layout-7">
+        <div class="row no-gutters">
+          <div class="col-5 col-sm-4">
+            Raz&oacute;n social:
+          </div><!-- col-4 -->
+          <div class="col-7 col-sm-8">
+            <input class="form-control" type="text" name="name" placeholder="Razón Social" [(ngModel)]="companyName">
+            <ul class="parsley-errors-list filled" id="error-rs" *ngIf="errorRS">
+              <li class="parsley-required">{{errorRSMsg}}</li>
+            </ul>
+          </div><!-- col-8 -->
+        </div><!-- row -->
+        <div class="row no-gutters">
+          <div class="col-5 col-sm-4">
+            Rut:
+          </div><!-- col-4 -->
+          <div class="col-7 col-sm-8">
+            <input class="form-control" type="text" name="rut" placeholder="15.722.520-0" [(ngModel)]="rut">
+            <ul class="parsley-errors-list filled" id="error-rut" *ngIf="errorRut">
+              <li class="parsley-required">{{errorRutMsg}}</li>
+            </ul>
+          </div><!-- col-8 -->
+        </div><!-- row -->
+      </div><!-- form-layout -->
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Cancelar</button>
+    <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">Crear</button>
+  </div>
+</nz-modal>

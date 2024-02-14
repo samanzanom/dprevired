@@ -28,14 +28,12 @@ public class CompanyService {
     @Transactional
     public Company create(CompanyRequest request) {
         String rut = request.rut();
+        rut = rut.replace(".", "");
         String companyName = request.companyName();
-        Optional<Company> existingUser = repository.findByRut(rut);
-        if (existingUser.isPresent()) {
+        Optional<Company> existingCompany = repository.findByRut(rut);
+        if (existingCompany.isPresent()) {
             throw new DuplicateException(String.format("Company with the rut '%s' already exists.", rut));
         }
-
-        rut = rut.replace(".", "");
-
         // Texto Base: 3 primeras letras del nombre de la empresa
         String baseText = companyName.length() > 3 ? companyName.substring(0, 3) : companyName;
 

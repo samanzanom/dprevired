@@ -1,3 +1,9 @@
+CREATE DATABASE previred;
+
+CREATE USER previred WITH ENCRYPTED PASSWORD 'previred.2024';
+
+GRANT ALL PRIVILEGES ON DATABASE previred to previred;
+
 CREATE TABLE IF NOT EXISTS public.users
 (
     id       BIGSERIAL PRIMARY KEY,

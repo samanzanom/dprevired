@@ -19,8 +19,8 @@ services:
   app:
     container_name: springboot-app
     build:
-      context: ./backend # Asumiendo que tu Dockerfile está en la carpeta backend
-      dockerfile: Dockerfile # Asegúrate de tener un Dockerfile válido aquí
+      context: ./backend
+      dockerfile: Dockerfile
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/previred
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-previred}
@@ -28,4 +28,14 @@ services:
     depends_on:
       - postgres
     ports:
-      - "8080:8080" # El puerto 8080 del contenedor se mapea al puerto 8080 de tu host
+      - "8080:8080"
+
+  angular-app:
+    container_name: angular-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80" # Cambia 4200 a 80 si prefieres usar el puerto estándar para HTTP
+    depends_on:
+      - app # Asumiendo que tu aplicación Angular depende de tu backend
