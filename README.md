@@ -70,42 +70,34 @@ Asegúrate de tener instalado PostgreSQL en tu máquina local y de que esté cor
 
 2.- Clonar el repositorio
 
-	```shell
+	
 	git clone https://github.com/samanzanom/dprevired.git
-	``` 
+	
 
 3.- Ejecuta el script init-db.sql utilizando el comando psql. En este paso, es importante reemplazar nombre_de_usuario con el nombre del usuario maestro de tu base de datos PostgreSQL. Este usuario es aquel que tiene permisos para crear bases de datos, usuarios y asignar permisos en PostgreSQL. Si no estás seguro de cuál es, por defecto podría ser postgres en una instalación típica de PostgreSQL. El comando para ejecutar el script sería entonces:
 
-	```shell
+	
 	psql -U nombre_de_usuario -a -f ./dprevired/scripts/init-db.sql
-	```
+	
 
-	Donde nombre_de_usuario corresponde al usuario maestro de la base de datos PostgreSQL que tengas instalado en tu sistema. Este usuario es esencial para realizar las operaciones de creación y configuración inicial de la base de datos necesaria para la aplicación.
+Donde nombre_de_usuario corresponde al usuario maestro de la base de datos PostgreSQL que tengas instalado en tu sistema. Este usuario es esencial para realizar las operaciones de creación y configuración inicial de la base de datos necesaria para la aplicación.
 
 Siguiendo estos pasos, aseguras que cualquier persona que esté configurando la aplicación entienda la necesidad de utilizar el usuario correcto de PostgreSQL para la inicialización de la base de datos.
 
 
 ### Ejecución Local de la Aplicación Spring Boot
-
-
 	 
 1.- Navegar al directorio donde clonaste el proyecto y muevete a la carpeta del proyecto
 
-	```shell
     cd dprevired
-	```
 
 2.- Navegar al directorio de la aplicación Spring Boot
 
-	```shell
 	cd fuentes/backend
-	```
 	
 3.- Ejecutar la aplicación
 
-	```shell
     ./mvnw spring-boot:run
-	```
 	
 La aplicación Spring Boot ahora estará corriendo y accesible en `http://localhost:8080`.
 	
@@ -127,21 +119,15 @@ Esto te permitirá ver todos los endpoints disponibles, sus especificaciones y p
 
 2.- Navegar al directorio de la aplicación Angular
 
-	```shell
     cd /dprevired/fuentes/frontend
-	```
 	
 3.- Instalar las dependencias
 
-	```shell
     npm install
-	```
 	
 4.- Ejecutar la aplicación
 
-	```shell
 	ng serve
-	```
 	
 La aplicación Angular ahora estará corriendo y accesible en `http://localhost:4200`.
 
