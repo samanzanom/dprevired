@@ -107,7 +107,7 @@ La aplicación Spring Boot está configurada con Swagger para ofrecer una docume
 
 Para acceder a la documentación de Swagger, navega a:
 
-	http://localhost:8080/swagger-ui.html
+	http://localhost:8080/challenge-docs/swagger-ui/index.html
 	
 	
 Esto te permitirá ver todos los endpoints disponibles, sus especificaciones y probar las distintas operaciones de la API de forma interactiva.
